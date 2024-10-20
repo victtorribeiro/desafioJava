@@ -81,9 +81,9 @@
                             <label for="risco" class="form-label">Risco</label>
                             <select class="form-select" id="risco" required>
                                 <option value="" selected>Selecione uma Opção</option>
-                                <option>Baixo Risco</option>
-                                <option>Médio Risco</option>
-                                <option>Alto Risco</option>
+                                <option>Baixo</option>
+                                <option>Médio</option>
+                                <option>Alto</option>
                             </select>
                         </div>
                     </div>

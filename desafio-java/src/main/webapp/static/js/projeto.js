@@ -61,3 +61,33 @@ function listarGerentes(gerentes){
         listaGerentes.appendChild(listaItem);
     });
 }
+
+function CarregarDadosParaEdicao(button) {
+    const row = button.closest('tr');
+
+    const id = row.cells[0].textContent; // ID, d-none
+    const nome = row.cells[1].textContent; // Nome do Projeto
+    const dataInicio = row.cells[2].textContent; // Data de Início
+    const gerente = row.cells[3].getAttribute('data-value');; // Gerente Responsável
+    const previsaoFim = row.cells[4].textContent; // Previsão de Término
+    const dataFim = row.cells[5].textContent; // Data Real de Término
+    const orcamento = row.cells[6].textContent.replace('R$ ', '').replace(',', '.'); // Orçamento Total
+    const descricao = row.cells[7].textContent; // Descrição
+    const status = row.cells[8].textContent; // Status
+    const risco = row.cells[9].textContent; // Risco
+
+    // Preenche os campos do modal
+    document.getElementById('nome').value = nome;
+    document.getElementById('dataInicio').value = dataInicio;
+    document.getElementById('dataPrevisaoFim').value = previsaoFim;
+    document.getElementById('orcamento').value = orcamento;
+    document.getElementById('descricao').value = descricao;
+
+    // Preenche os selects do modal
+    document.getElementById('idGerente').value = gerente;
+    document.getElementById('status').value = status;
+    document.getElementById('risco').value = risco;
+
+    document.getElementById('idProjeto').value = id;
+
+}
