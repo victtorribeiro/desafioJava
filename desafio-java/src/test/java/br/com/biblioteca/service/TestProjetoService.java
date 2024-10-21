@@ -1,5 +1,6 @@
 package br.com.biblioteca.service;
 
+import br.com.biblioteca.enums.StatusEnum;
 import br.com.biblioteca.model.dto.ProjetoDTO;
 import br.com.biblioteca.model.entity.Projeto;
 import br.com.biblioteca.repository.ProjetoRepository;
@@ -40,12 +41,12 @@ class TestProjetoService {
         projetoDTO = new ProjetoDTO();
         projetoDTO.setIdGerente(1L);
         projetoDTO.setNome("Projeto Teste");
-        projetoDTO.setStatus("Planejado");
+        projetoDTO.setStatus(StatusEnum.PLANEJADO);
 
         projeto = new Projeto();
         projeto.setId(1L);
         projeto.setNome("Projeto Teste");
-        projeto.setStatus("Planejado");
+        projeto.setStatus(StatusEnum.PLANEJADO);
     }
 
     @Test
@@ -128,7 +129,7 @@ class TestProjetoService {
 
     @Test
     void testDeletarProjetoComStatusInvalido() {
-        projeto.setStatus("Iniciado");
+        projeto.setStatus(StatusEnum.INICIADO);
         when(projetoRepository.findById(1L)).thenReturn(Optional.of(projeto));
 
         ResponseEntity<String> response = projetoService.deletarProjeto(1L);
