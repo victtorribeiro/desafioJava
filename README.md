@@ -66,21 +66,21 @@ Outras informações serão enviadas no e-mail juntamente com o teste.
 `-- Table Membros`<br/>
 `-- -----------------------------------------------------`<br/>
 
-CREATE TABLE IF NOT EXISTS public.membro
-(
-    id bigint NOT NULL DEFAULT nextval('membro_id_seq'::regclass),
-    idpessoa bigint,
-    idprojeto bigint,
-    CONSTRAINT membro_pkey PRIMARY KEY (id),
-    CONSTRAINT fk14e1iadjrpdifol42j76vovmj FOREIGN KEY (idprojeto)
-        REFERENCES public.projeto (id) MATCH SIMPLE
-        ON UPDATE NO ACTION
-        ON DELETE NO ACTION,
-    CONSTRAINT fk31n4uk4b1qo688ibg0j82wm4h FOREIGN KEY (idpessoa)
-        REFERENCES public.pessoa (id) MATCH SIMPLE
-        ON UPDATE NO ACTION
-        ON DELETE NO ACTION
-)
+` CREATE TABLE IF NOT EXISTS public.membro` <br/>
+` (` <br/>
+`     id bigint NOT NULL DEFAULT nextval('membro_id_seq'::regclass),` <br/>
+`     idpessoa bigint,` <br/>
+`     idprojeto bigint,` <br/>
+`     CONSTRAINT membro_pkey PRIMARY KEY (id),` <br/>
+`     CONSTRAINT fk14e1iadjrpdifol42j76vovmj FOREIGN KEY (idprojeto)` <br/>
+`         REFERENCES public.projeto (id) MATCH SIMPLE` <br/>
+`         ON UPDATE NO ACTION` <br/>
+`         ON DELETE NO ACTION,` <br/>
+`     CONSTRAINT fk31n4uk4b1qo688ibg0j82wm4h FOREIGN KEY (idpessoa)` <br/>
+`         REFERENCES public.pessoa (id) MATCH SIMPLE` <br/>
+`         ON UPDATE NO ACTION` <br/>
+`         ON DELETE NO ACTION` <br/>
+` )` <br/>
 
 
 https://raw.githubusercontent.com/acelant/testeBiblioteca/master/TesteProjetos.png
