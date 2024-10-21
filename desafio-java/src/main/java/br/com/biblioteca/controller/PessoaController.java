@@ -19,7 +19,7 @@ public class PessoaController {
 
     private final PessoaService pessoaService;
 
-    @PostMapping
+    @PostMapping("/cadastrarPessoa")
     public ResponseEntity<PessoaDTO> adicionarPessoa(@RequestBody PessoaDTO pessoaDTO) {
         Pessoa pessoa = new Pessoa();
         BeanUtils.copyProperties(pessoaDTO, pessoa);
