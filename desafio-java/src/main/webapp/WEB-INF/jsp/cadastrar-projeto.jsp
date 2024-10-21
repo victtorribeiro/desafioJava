@@ -40,7 +40,7 @@
                             <input type="date" class="form-control" id="dataFim">
                         </div>
                         <div class="col-md-6 mb-3">
-                            <label for="listaGerentes" class="form-label">Gerente</label>
+                            <label for="idGerente" class="form-label">Gerente</label>
                             <select class="form-select" id="idGerente" required>
                                 <option value="" disabled selected>Selecione um gerente</option>
                              </select>
@@ -64,27 +64,18 @@
                     </div>
                     <div class="row">
                         <div class="col-md-6 mb-3">
-                            <label for="status" class="form-label">Status</label>
-                            <select class="form-select" id="status" required>
-                                <option value="" selected>Selecione uma Opção</option>
-                                <option>Em Análise</option>
-                                <option>Análise Realizada</option>
-                                <option>Análise Aprovada</option>
-                                <option>Iniciado</option>
-                                <option>Planejado</option>
-                                <option>Em Andamento</option>
-                                <option>Encerrado</option>
-                                <option>Cancelado</option>
-                            </select>
+                            <label for="statusList" class="form-label">Status</label>
+                                <form:select class="form-select" path="statusList" id="statusList" required="required">
+                                    <form:option value="" label="Selecione uma opção"/>
+                                    <form:options items="${statusList}" itemValue="name" itemLabel="value"/>
+                                </form:select>
                         </div>
                         <div class="col-md-6 mb-3">
-                            <label for="risco" class="form-label">Risco</label>
-                            <select class="form-select" id="risco" required>
-                                <option value="" selected>Selecione uma Opção</option>
-                                <option>Baixo</option>
-                                <option>Médio</option>
-                                <option>Alto</option>
-                            </select>
+                            <label for="riscoList" class="form-label">Risco</label>
+                            <form:select class="form-select" path="riscoList" id="riscoList" required="required">
+                                <form:option value="" label="Selecione uma opção"/>
+                                <form:options items="${riscoList}" itemValue="name" itemLabel="value"/>
+                            </form:select>
                         </div>
                     </div>
                     <button type="submit" class="btn btn-success" onclick="Cadastro()" >Cadastrar</button>

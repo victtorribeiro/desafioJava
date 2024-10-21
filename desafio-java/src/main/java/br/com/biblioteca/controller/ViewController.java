@@ -25,14 +25,19 @@ public class ViewController {
 	}
 
 	@GetMapping("/cadastrar")
-	public String cadastrarProjetoView(){
-		return "cadastrar-projeto";
+	public ModelAndView cadastrarProjetoView(){
+		ModelAndView model = new ModelAndView("cadastrar-projeto");
+		model.addObject("riscoList", projetoController.listarRiscos());
+		model.addObject("statusList", projetoController.listarStatus());
+		return model;
 	}
 
 	@GetMapping("/listarProjetos")
 	public ModelAndView listarProjetos (){
 		List<Projeto> projetoList = projetoController.listProjetos();
 		ModelAndView model = new ModelAndView("listar-projetos");
+		model.addObject("riscoList", projetoController.listarRiscos());
+		model.addObject("statusList", projetoController.listarStatus());
 		model.addObject("projetoList", projetoList);
 		return model;
 	}

@@ -1,4 +1,5 @@
 <%@page contentType="text/html" pageEncoding="UTF-8" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <div class="modal fade" id="modalEditarProjeto" tabindex="-1"  aria-labelledby="modalEditarProjetoLabel" aria-hidden="true">
     <div class="modal-dialog" >
         <div class="modal-content">
@@ -24,6 +25,10 @@
                         <input type="date" class="form-control" id="dataPrevisaoFim" name="dataPrevisaoFim" required>
                     </div>
                     <div class="form-group">
+                        <label for="dataFim">Data Final</label>
+                        <input type="date" class="form-control" id="dataFim" name="dataFim" required>
+                    </div>
+                    <div class="form-group">
                         <label for="orcamento">Orçamento Total (R$)</label>
                         <input type="number" class="form-control" id="orcamento" name="orcamento" step="0.01" required>
                     </div>
@@ -40,27 +45,18 @@
                         <textarea class="form-control" id="descricao" name="descricao" rows="3" required></textarea>
                     </div>
                     <div class="form-group">
-                        <label for="status">Status</label>
-                        <select class="form-control" id="status" name="status" required>
-                            <option value="" selected>Selecione o Status</option>
-                                <option>Em Análise</option>
-                                <option>Análise Realizada</option>
-                                <option>Análise Aprovada</option>
-                                <option>Iniciado</option>
-                                <option>Planejado</option>
-                                <option>Em Andamento</option>
-                                <option>Encerrado</option>
-                                <option>Cancelado</option>
-                        </select>
+                                <label for="statusList" class="form-label">Status</label>
+                                <form:select class="form-select" path="statusList" id="statusList" required="required">
+                                    <form:option value="" label="Selecione uma opção"/>
+                                    <form:options items="${statusList}" itemValue="name" itemLabel="value"/>
+                                </form:select>
                     </div>
                     <div class="form-group">
-                        <label for="risco">Risco</label>
-                        <select class="form-control" id="risco" name="risco" required>
-                            <option value="" selected>Selecione o Risco</option>
-                            <option>Baixo</option>
-                            <option>Médio</option>
-                            <option>Alto</option>
-                        </select>
+                                <label for="riscoList" class="form-label">Risco</label>
+                                <form:select class="form-select" path="riscoList" id="riscoList" required="required">
+                                    <form:option value="" label="Selecione uma opção"/>
+                                    <form:options items="${riscoList}" itemValue="name" itemLabel="value"/>
+                                </form:select>
                     </div>
                 </form>
             </div>

@@ -3,6 +3,10 @@ window.onload = buscarGerenteList;
 function Cadastro() {
     const urlCadastrarProjeto = `http://127.0.0.1:8080/projeto/cadastrarProjeto/`;
     const projeto = getProjeto();
+    if (!projeto.nome || projeto.nome.trim() === "") {
+        alert('O nome do projeto é obrigatório.');
+        return;
+    }
 
     try {
         fetch(urlCadastrarProjeto, {
@@ -19,7 +23,9 @@ function Cadastro() {
             const errorData = response.json();
             console.log(errorData);
         }
+            location.reload();
     } catch (error) {
+            location.reload();
         console.error(error);
     }
 }
@@ -31,9 +37,9 @@ function getProjeto() {
         dataPrevisaoFim: document.getElementById('dataPrevisaoFim').value,
         dataFim: document.getElementById('dataFim').value,
         descricao: document.getElementById('descricao').value,
-        status: document.getElementById('status').value,
+        status: document.getElementById('statusList').value,
         orcamento: document.getElementById('orcamento').value,
-        risco: document.getElementById('risco').value,
+        risco: document.getElementById('riscoList').value,
         idGerente: document.getElementById('idGerente').value
     };
 }
@@ -62,6 +68,8 @@ function listarGerentes(gerentes){
     });
 }
 
+
+
 function CarregarDadosParaEdicao(button) {
     const row = button.closest('tr');
 
@@ -73,22 +81,25 @@ function CarregarDadosParaEdicao(button) {
     const dataFim = row.cells[5].textContent; // Data Real de Término
     const orcamento = row.cells[6].textContent.replace('R$ ', '').replace(',', '.'); // Orçamento Total
     const descricao = row.cells[7].textContent; // Descrição
-    const status = row.cells[8].textContent; // Status
-    const risco = row.cells[9].textContent; // Risco
+    const status = row.cells[8].getAttribute('data-status'); // Status
+    const risco = row.cells[9].getAttribute('data-risco'); // Risco
 
     // Preenche os campos do modal
     document.getElementById('nome').value = nome;
     document.getElementById('dataInicio').value = dataInicio;
     document.getElementById('dataPrevisaoFim').value = previsaoFim;
+    document.getElementById('dataFim').value = dataFim;
     document.getElementById('orcamento').value = orcamento;
     document.getElementById('descricao').value = descricao;
 
     // Preenche os selects do modal
     document.getElementById('idGerente').value = gerente;
-    document.getElementById('status').value = status;
-    document.getElementById('risco').value = risco;
+    document.getElementById('statusList').value = status;
+    document.getElementById('riscoList').value = risco;
 
     document.getElementById('idProjeto').value = id;
+
+
 
 }
 
@@ -99,16 +110,17 @@ function AlterarProjeto() {
         nome: document.getElementById('nome').value,
         dataInicio: document.getElementById('dataInicio').value,
         dataPrevisaoFim: document.getElementById('dataPrevisaoFim').value,
+        dataFim: document.getElementById('dataFim').value,
         orcamento: document.getElementById('orcamento').value,
         idGerente: document.getElementById('idGerente').value,
         descricao: document.getElementById('descricao').value,
-        status: document.getElementById('status').value,
-        risco: document.getElementById('risco').value
+        status: document.getElementById('statusList').value,
+        risco: document.getElementById('riscoList').value
     }
 
-// Envia uma requisição AJAX para atualizar o projeto
+
     fetch(`http://127.0.0.1:8080/projeto/atualizarProjeto/${idProjeto}`, {
-        method: 'PUT', // Método HTTP PUT para atualizar
+        method: 'PUT',
         headers: {
             'Content-Type': 'application/json'
         },

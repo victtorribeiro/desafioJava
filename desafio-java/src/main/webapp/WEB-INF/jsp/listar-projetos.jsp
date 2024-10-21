@@ -60,8 +60,8 @@
                                     <td>${projeto.dataFim}</td>
                                     <td>R$ ${projeto.orcamento}</td>
                                     <td class="text-left">${projeto.descricao}</td>
-                                    <td>${projeto.status}</td>
-                                    <td>${projeto.risco}</td>
+                                    <td data-status="${projeto.status}">${projeto.status.value}</td>
+                                    <td data-risco="${projeto.risco}">${projeto.risco.value}</td>
                                     <td>
                                         <button type="button" data-id="${projeto.id}" id="idItem" onclick="CarregarDadosParaEdicao(this);"
                                             class="btn btn-sm btn-primary mb-2" data-toggle="modal" data-target="#modalEditarProjeto">

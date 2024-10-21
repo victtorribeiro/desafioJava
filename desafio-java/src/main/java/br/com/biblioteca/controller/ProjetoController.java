@@ -1,6 +1,8 @@
 package br.com.biblioteca.controller;
 
 
+import br.com.biblioteca.enums.RiscoEnum;
+import br.com.biblioteca.enums.StatusEnum;
 import br.com.biblioteca.model.dto.MembroDTO;
 import br.com.biblioteca.model.dto.ProjetoDTO;
 import br.com.biblioteca.model.entity.Projeto;
@@ -11,6 +13,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Arrays;
 import java.util.List;
 
 @CrossOrigin
@@ -65,6 +68,13 @@ public class ProjetoController {
             e.getStackTrace();
             return new ResponseEntity<>("Erro", HttpStatus.BAD_REQUEST);
         }
+    }
+
+    public List<RiscoEnum> listarRiscos() {
+        return Arrays.asList(RiscoEnum.values());
+    }
+    public List<StatusEnum> listarStatus(){
+        return Arrays.asList(StatusEnum.values());
     }
 
 }

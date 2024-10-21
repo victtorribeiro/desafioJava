@@ -1,5 +1,6 @@
 package br.com.biblioteca.service;
 
+import br.com.biblioteca.enums.StatusEnum;
 import br.com.biblioteca.model.dto.ProjetoDTO;
 import br.com.biblioteca.model.entity.Pessoa;
 import br.com.biblioteca.model.entity.Projeto;
@@ -23,6 +24,7 @@ public class ProjetoService {
 
     public Projeto salvarProjeto(ProjetoDTO projetoDTO) {
         Projeto projeto = new Projeto();
+
 
         if (projetoDTO.getIdGerente() != null) {
             Pessoa pessoa = new Pessoa(projetoDTO.getIdGerente());
@@ -57,7 +59,7 @@ public class ProjetoService {
         if(projeto == null){
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
-        if (projeto.getStatus().equals("Iniciado") || projeto.getStatus().equals("Em Andamento") || projeto.getStatus().equals("Encerrado")) {
+        if (projeto.getStatus().equals(StatusEnum.INICIADO) || projeto.getStatus().equals(StatusEnum.EM_ANDAMENTO) || projeto.getStatus().equals(StatusEnum.ENCERRADO)) {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
         membroService.deletarMembro(projeto);

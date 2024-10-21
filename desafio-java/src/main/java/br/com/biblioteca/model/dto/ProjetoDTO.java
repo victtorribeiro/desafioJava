@@ -1,5 +1,7 @@
 package br.com.biblioteca.model.dto;
 
+import br.com.biblioteca.enums.RiscoEnum;
+import br.com.biblioteca.enums.StatusEnum;
 import br.com.biblioteca.model.entity.Pessoa;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -21,9 +23,9 @@ public class ProjetoDTO {
     private LocalDate dataPrevisaoFim;
     private LocalDate dataFim;
     private String descricao;
-    private String status;
+    private StatusEnum status;
     private Float orcamento;
-    private String risco;
+    private RiscoEnum risco;
 
     private Long idGerente;
 

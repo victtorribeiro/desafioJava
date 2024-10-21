@@ -1,5 +1,7 @@
 package br.com.biblioteca.model.entity;
 
+import br.com.biblioteca.enums.RiscoEnum;
+import br.com.biblioteca.enums.StatusEnum;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -33,12 +35,12 @@ public class Projeto {
     private String descricao;
 
     @Column(length = 45)
-    private String status;
+    private StatusEnum status;
 
     private Float orcamento;
 
     @Column(length = 45)
-    private String risco;
+    private RiscoEnum risco;
 
     @ManyToOne
     @JoinColumn(name = "idgerente", referencedColumnName = "id")
