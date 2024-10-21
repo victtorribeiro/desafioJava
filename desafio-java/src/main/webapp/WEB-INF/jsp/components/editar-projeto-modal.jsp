@@ -1,6 +1,6 @@
 <%@page contentType="text/html" pageEncoding="UTF-8" %>
-<div class="modal fade" id="modalEditarProjeto" tabindex="-1" role="dialog" aria-labelledby="modalEditarProjetoLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
+<div class="modal fade" id="modalEditarProjeto" tabindex="-1"  aria-labelledby="modalEditarProjetoLabel" aria-hidden="true">
+    <div class="modal-dialog" >
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="modalEditarProjetoLabel">Editar Projeto</h5>
@@ -66,7 +66,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
-                <button type="button" class="btn btn-primary" onclick="atualizarProjeto()">Salvar Alterações</button>
+                <button type="button" class="btn btn-primary"  onclick="AlterarProjeto()">Salvar Alterações</button>
             </div>
         </div>
     </div>

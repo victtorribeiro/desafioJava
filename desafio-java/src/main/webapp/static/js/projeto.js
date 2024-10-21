@@ -91,3 +91,65 @@ function CarregarDadosParaEdicao(button) {
     document.getElementById('idProjeto').value = id;
 
 }
+
+function AlterarProjeto() {
+    // Cria o objeto com os dados do projeto
+    const idProjeto = document.getElementById('idProjeto').value;
+    const projetoData = {
+        nome: document.getElementById('nome').value,
+        dataInicio: document.getElementById('dataInicio').value,
+        dataPrevisaoFim: document.getElementById('dataPrevisaoFim').value,
+        orcamento: document.getElementById('orcamento').value,
+        idGerente: document.getElementById('idGerente').value,
+        descricao: document.getElementById('descricao').value,
+        status: document.getElementById('status').value,
+        risco: document.getElementById('risco').value
+    }
+
+// Envia uma requisição AJAX para atualizar o projeto
+    fetch(`http://127.0.0.1:8080/projeto/atualizarProjeto/${idProjeto}`, {
+        method: 'PUT', // Método HTTP PUT para atualizar
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(projetoData)
+    })
+        .then(response => {
+        if (response.ok) {
+            alert('Projeto atualizado com sucesso!');
+            location.reload(); // Recarrega a página após a atualização
+        } else {
+            return response.json().then(error => {
+                throw new Error(error.message || 'Erro ao atualizar projeto');
+            });
+        }
+    })
+        .catch(error => {
+        console.error('Erro:', error);
+        alert('Erro ao atualizar o projeto: ' + error.message);
+    });
+
+}
+
+function DeletarProjeto(idProjeto) {
+    fetch(`http://127.0.0.1:8080/projeto/deletarProjeto/${idProjeto}`, {
+        method: 'DELETE',
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    })
+        .then(response => {
+        if (response.ok) {
+            alert("Projeto  excluído com sucesso!");
+
+            location.reload();
+        } else {
+            alert("Erro ao excluir projeto! Verifique se não está com Status: Iniciado, Em andamento ou Encerrado.")
+        }
+    })
+        .catch(error => {
+        console.error('Erro:', error);
+        alert('Erro ao deletar o projeto: ' + error.message);
+    });
+
+}

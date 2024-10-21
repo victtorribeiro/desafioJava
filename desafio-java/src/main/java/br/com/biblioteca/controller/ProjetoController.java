@@ -32,7 +32,7 @@ public class ProjetoController {
 
             return new ResponseEntity<>(projetoDTO, HttpStatus.OK);
         } catch (Exception ex) {
-            ex.getMessage();
+            ex.getStackTrace();
             return new ResponseEntity<>(projetoDTO, HttpStatus.BAD_REQUEST);
         }
     }
@@ -42,6 +42,29 @@ public class ProjetoController {
         return projetoService.listarProjetos();
     }
 
+    @PutMapping("/atualizarProjeto/{id}")
+    public ResponseEntity<ProjetoDTO> alterarProjeto(@PathVariable("id") Long id, @RequestBody ProjetoDTO projetoDTO) {
+        try {
+            Projeto projeto = projetoService.alterarProjeto(id, projetoDTO);
 
+            membroService.alterarMembro(new MembroDTO(projeto.getGerente(), projeto));
+
+            return new ResponseEntity<>(projetoDTO, HttpStatus.OK);
+        }catch (Exception e) {
+            e.getStackTrace();
+            return new ResponseEntity<>(projetoDTO, HttpStatus.BAD_REQUEST);
+        }
+    }
+
+    @DeleteMapping("/deletarProjeto/{id}")
+    public ResponseEntity<String> deletarProjeto(@PathVariable Long id) {
+        try {
+            return projetoService.deletarProjeto(id);
+
+        }catch (Exception e) {
+            e.getStackTrace();
+            return new ResponseEntity<>("Erro", HttpStatus.BAD_REQUEST);
+        }
+    }
 
 }

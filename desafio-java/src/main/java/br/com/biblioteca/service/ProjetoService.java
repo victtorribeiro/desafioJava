@@ -6,9 +6,12 @@ import br.com.biblioteca.model.entity.Projeto;
 import br.com.biblioteca.repository.ProjetoRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.BeanUtils;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -16,12 +19,12 @@ public class ProjetoService {
 
     private final ProjetoRepository projetoRepository;
 
-    private final PessoaService pessoaService;
+    private final MembroService membroService;
 
-    public Projeto salvarProjeto(ProjetoDTO projetoDTO){
+    public Projeto salvarProjeto(ProjetoDTO projetoDTO) {
         Projeto projeto = new Projeto();
 
-        if(projetoDTO.getIdGerente() != null){
+        if (projetoDTO.getIdGerente() != null) {
             Pessoa pessoa = new Pessoa(projetoDTO.getIdGerente());
             projetoDTO.setGerente(pessoa);
         }
@@ -29,7 +32,38 @@ public class ProjetoService {
         return projetoRepository.save(projeto);
     }
 
-    public List<Projeto> listarProjetos(){
+    public List<Projeto> listarProjetos() {
         return projetoRepository.findAll();
     }
+
+    public Projeto alterarProjeto(Long id, ProjetoDTO projetoDTO) {
+        Projeto projeto = new Projeto();
+        if (projetoDTO.getIdGerente() != null) {
+            Pessoa pessoa = new Pessoa(projetoDTO.getIdGerente());
+            projetoDTO.setGerente(pessoa);
+        }
+        BeanUtils.copyProperties(projetoDTO, projeto);
+        projeto.setId(id);
+        return projetoRepository.save(projeto);
+    }
+
+    public Projeto buscarProjetoId(Long id) {
+        Optional<Projeto> projetoBuscado = projetoRepository.findById(id);
+        return projetoBuscado.orElse(null);
+    }
+
+    public ResponseEntity<String> deletarProjeto(Long id)  {
+        Projeto projeto = buscarProjetoId(id);
+        if(projeto == null){
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
+        if (projeto.getStatus().equals("Iniciado") || projeto.getStatus().equals("Em Andamento") || projeto.getStatus().equals("Encerrado")) {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
+        membroService.deletarMembro(projeto);
+        projetoRepository.deleteById(id);
+        return new ResponseEntity<>(HttpStatus.OK);
+
+    }
+
 }

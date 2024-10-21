@@ -63,12 +63,12 @@
                                     <td>${projeto.status}</td>
                                     <td>${projeto.risco}</td>
                                     <td>
-                                        <button type="button" data-id="${projetos.id}" id="idItem" onclick="CarregarDadosParaEdicao(this);"
+                                        <button type="button" data-id="${projeto.id}" id="idItem" onclick="CarregarDadosParaEdicao(this);"
                                             class="btn btn-sm btn-primary mb-2" data-toggle="modal" data-target="#modalEditarProjeto">
                                             <i class="bi bi-pencil"></i> Editar
                                         </button>
-                                        <button type="button" data-id="${projetos.id}" id="delete" class="btn btn-sm btn-danger"
-                                            onclick="RecuperaId(); deleteProjeto(idItemRow)">
+                                        <button type="button"  id="delete" class="btn btn-sm btn-danger"
+                                            onclick="DeletarProjeto(${projeto.id})">
                                             <i class="bi bi-trash"></i> Excluir
                                         </button>
                                     </td>
